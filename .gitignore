@@ -1,0 +1,22 @@
+*.i
+*.ii
+*.gpu
+*.ptx
+*.cubin
+*.fatbin
+
+# Build directories and compiled binaries
+build/
+__pycache__/
+*.py[cod]
+CUDA-GeMM/src/*.o
+CUDA-GeMM/src/gemm
+
+# Generated CUDA benchmark data
+CUDA-GeMM/src/M.bin
+CUDA-GeMM/src/N.bin
+CUDA-GeMM/src/P_gpu.bin
+CUDA-GeMM/src/params.txt
+
+# Generated Conway output
+Life-game-Conway/results/

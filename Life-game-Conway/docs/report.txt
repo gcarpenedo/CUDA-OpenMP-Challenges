@@ -1,0 +1,9 @@
+1. Avoided looping over all the cells of the grid at each iteration by tracking only dead cells with alive neighbors.
+With this approach we managed to skip vast empty regions, drastically reducing the workload per step.
+2. Instead of recalculating neighbor counts for every cell at every step, update them incrementally: 
+when a cell is born it atomically increments the count of its eight neighbors using process_alive_cell.
+3. We used thread-local vectors to accumulate birth candidates: this minimizes synchronization overhead.
+4. We adopted a flags array combined with atomic capture operations to ensure that a neighbor is added ecactly once.
+5. Using a sequential prefix sum we calculate the offsets allowing threads to copy data on the vector concurrently.
+6. Since hue averaging has to be computed up to eight times per cell, we used the optimized __builtin_sincosf function,
+it is called only from new-born cells.
